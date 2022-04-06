@@ -40,12 +40,13 @@
     <Button
         android:id="@+id/btn_backLogin"
         android:layout_width="240dp"
-        android:layout_height="28dp"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="220dp"
+        android:layout_marginBottom="210dp"
         android:background="@drawable/btn_pastelpurple"
         android:text="뒤로가기"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:textSize="10dp" />
 
 </RelativeLayout>
