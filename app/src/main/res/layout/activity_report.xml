@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <View
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:layout_centerInParent="true"
+        android:background="@color/colorCloudyGray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="210dp"
+        android:text="관리자에게 의견을 남겨주세요!"
+        android:textSize="20dp" />
+
+    <View
+        android:layout_width="280dp"
+        android:layout_height="240dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240dp"
+        android:layout_marginBottom="200dp"
+        android:background="@color/colorWhite"
+        android:gravity="top"
+        />
+
+    <ImageView
+        android:id="@+id/btn_kakao"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="115dp"
+        android:src="@drawable/kakao_talk" />
+
+    <Button
+        android:id="@+id/btn_backLogin"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="220dp"
+        android:background="@drawable/btn_pastelpurple"
+        android:text="뒤로가기"
+        android:textColor="@color/colorWhite" />
+
+</RelativeLayout>

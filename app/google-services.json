@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "610933631589",
+    "project_id": "kirokhada-3d573",
+    "storage_bucket": "kirokhada-3d573.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610933631589:android:8ab92d8f574cc7695b748c",
+        "android_client_info": {
+          "package_name": "com.example.kirokhada"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610933631589-bp6e6v74fda9pqbudg9oev030ga5etqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADYC3dvdmhbErwwdCGkpJe5HpEkghw3gA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610933631589-bp6e6v74fda9pqbudg9oev030ga5etqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

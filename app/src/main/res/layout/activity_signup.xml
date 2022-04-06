@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SignUpActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="5dp">
+
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sing_icon"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_cloudy"
+        android:id="@+id/sign_id"
+        android:paddingStart="14dp"
+        android:hint="Student Number"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_cloudy"
+        android:id="@+id/sign_name"
+        android:paddingStart="14dp"
+        android:hint="NAME"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_cloudy"
+        android:id="@+id/emailEditText"
+        android:paddingStart="14dp"
+        android:hint="E-Mail"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_cloudy"
+        android:id="@+id/passwordEditText"
+        android:paddingStart="14dp"
+        android:hint="PW"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+
+    <Button
+        android:id="@+id/btn_signUp"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:textColor="#ffffff"
+        android:text="SIGN UP"
+        android:textSize="29dp"
+        android:gravity="center"
+        android:background="@drawable/btn_pastelpurple"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_backLogin"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:textColor="#ffffff"-->
+<!--        android:text="Back"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="20dp"-->
+<!--        android:gravity="center"-->
+<!--        android:background="@drawable/btn_blue"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        />-->
+
+
+</LinearLayout>
