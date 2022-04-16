@@ -32,7 +32,7 @@ public class ReportActivity extends AppCompatActivity{
         btn_kakao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://open.kakao.com/o/g4h4n5Ac"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://open.kakao.com/o/scqFNvbe"));
                 //카카오톡 오픈채팅으로 연결
                 startActivity(intent);  //액티비티 이동
             }
