@@ -27,11 +27,25 @@
             </intent-filter>
         </activity>
 
-        <!--        로그인-->
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".UserFindActivity"/>
         <activity android:name=".ReportActivity"/>
+
+        <activity android:name=".Board.activity.MainActivity" />
+        <activity android:name=".Board.activity.ProfileActivity" />
+        <activity android:name=".BasicActivity" />
+
+        <!--카메라!-->
+        <activity android:name=".CameraActivity" />
+
+        <!--게시판-->
+        <activity android:name=".Board.activity.WritePostActivity" />
+        <activity android:name=".Board.activity.SbordActivity" />
+
+        <!--리뷰-->
+        <activity android:name=".Board.activity.RWritePostActivity" />
+        <activity android:name=".Board.activity.RbordActivity" />
     </application>
 
 </manifest>

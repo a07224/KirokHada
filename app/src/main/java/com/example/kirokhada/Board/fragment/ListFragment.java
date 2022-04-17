@@ -53,7 +53,6 @@ public class ListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_list, container, false);
 
         recyclerViewAction();
-        fabAction();
         refresh();
 
         filter();
@@ -97,27 +96,7 @@ public class ListFragment extends Fragment {
     }
 
 
-    public void fabAction() {
-        fab = view.findViewById(R.id.write_text);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent = new Intent(getActivity(), WritePostActivity.class);
-
-                onDestroyView();
-
-                getDataList.clear();
-                bordAdapter.notifyDataSetChanged();
-                recyclerView.removeAllViewsInLayout();
-                recyclerView.removeAllViews();
-                bordAdapter.refresh();
-                bordAdapter.notifyDataSetChanged();
-
-                startActivity(intent);
-            }
-        });
-    }
 
 
     public void recyclerViewAction() {

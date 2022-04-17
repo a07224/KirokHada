@@ -118,10 +118,10 @@ public class WritePostActivity extends AppCompatActivity {
 
 
     private void setting() {
-        titleTextView.setText("글 제목 :");
-        timeTextView.setText("시간 :");
-        placeTextView.setText("장소 :");
-        memberCountTextView.setText("인원수 :");
+        titleTextView.setText("책 제목 :");
+        timeTextView.setText("작가 :");
+        placeTextView.setText("평점 :");
+        memberCountTextView.setText("키워드 :");
     }
 
     private void getData() {

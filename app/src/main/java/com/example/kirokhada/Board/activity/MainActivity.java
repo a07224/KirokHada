@@ -1,9 +1,9 @@
 package com.example.kirokhada.Board.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +13,7 @@ import com.example.kirokhada.R;
 import com.example.kirokhada.Board.fragment.ListFragment;
 import com.example.kirokhada.Board.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction ft;
     private ListFragment listFragment;
     private ProfileFragment profileFragment;
+    private FloatingActionButton fabOne;
+    private FloatingActionButton fabTwo;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,20 +32,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.action_list :
-                        setFrag(0);
-                        break;
-                    case R.id.action_profile :
-                        setFrag(1);
-                        break;
-                }
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.action_list :
+                    setFrag(0);
+                    break;
+                case R.id.action_profile :
+                    setFrag(1);
+                    break;
 
-                return true;
+                case R.id.action_review :
+                    fab();
+                    break;
             }
+
+            return true;
         });
         listFragment = new ListFragment();
         profileFragment = new ProfileFragment();
@@ -63,7 +68,32 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.frame_content, profileFragment);
                 ft.commit();
                 break;
-
         }
     }
+
+    private void fab() {
+
+    }
+
+//    public void fabAction() {
+//        fab = view.findViewById(R.id.write_text);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent(getActivity(), WritePostActivity.class);
+//
+//                onDestroyView();
+//
+//                getDataList.clear();
+//                bordAdapter.notifyDataSetChanged();
+//                recyclerView.removeAllViewsInLayout();
+//                recyclerView.removeAllViews();
+//                bordAdapter.refresh();
+//                bordAdapter.notifyDataSetChanged();
+//
+//                startActivity(intent);
+//            }
+//        });
+//    }
 }

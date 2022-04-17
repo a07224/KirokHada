@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+
         android:src="@drawable/sing_icon" />
 
 
@@ -26,8 +27,8 @@
         android:gravity="center">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="320dp"
-            android:layout_height="385dp"
+            android:layout_width="360dp"
+            android:layout_height="405dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="50dp"
             android:background="@color/white"
@@ -42,7 +43,7 @@
                 android:text="@string/email"
                 android:textAllCaps="false"
                 android:textColor="@color/colorGray"
-                android:textSize="7pt"
+                android:textSize="9pt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +57,7 @@
                 android:background="@drawable/edittext_box"
                 android:hint="@string/emain_hint"
                 android:paddingStart="10dp"
-                android:textSize="5pt"
+                android:textSize="6pt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
@@ -70,7 +71,7 @@
                 android:text="Password"
                 android:textAllCaps="false"
                 android:textColor="@color/colorGray"
-                android:textSize="7pt"
+                android:textSize="9pt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
@@ -83,8 +84,9 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edittext_box"
                 android:hint="비밀번호를 적어주세요."
+                android:inputType="textPassword"
                 android:paddingStart="10dp"
-                android:textSize="5pt"
+                android:textSize="6pt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordTextView" />
@@ -98,7 +100,7 @@
                 android:text="Password Check"
                 android:textAllCaps="false"
                 android:textColor="@color/colorGray"
-                android:textSize="7pt"
+                android:textSize="9pt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
@@ -111,15 +113,16 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edittext_box"
                 android:hint="비밀번호를 다시 적어주세요."
+                android:inputType="textPassword"
                 android:paddingStart="10dp"
-                android:textSize="5pt"
+                android:textSize="6pt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rePasswordTextView" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                android:layout_height="1dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -130,26 +133,28 @@
 
             <Button
                 android:id="@+id/cancel_btn"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="@android:color/transparent"
                 android:text="CANCEL"
                 android:textColor="@color/colorGray"
+                android:textSize="8pt"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/join_btn"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/join_btn"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="@android:color/transparent"
                 android:text="JOIN"
                 android:textColor="@android:color/holo_blue_bright"
+                android:textSize="8pt"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cancel_btn" />

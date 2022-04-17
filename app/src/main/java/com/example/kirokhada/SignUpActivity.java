@@ -24,8 +24,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private static final String TAG = "SignUpActivity";
 
-    public EditText id, name, emailId, passwd;
-    private Button btnSignUp;
+    public EditText emailId, passwd, repasswd;
+    private Button join_btn;
 
     // 추가 코드
     private FirebaseDatabase mFirebaseDatabase;
@@ -38,12 +38,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        id = findViewById(R.id.sign_id);
-        name = findViewById(R.id.sign_name);
         emailId = findViewById(R.id.emailEditText);
         passwd = findViewById(R.id.passwordEditText);
-
-        btnSignUp = findViewById(R.id.btn_signUp);
+        repasswd = findViewById(R.id.rePasswordEditText);
+        join_btn = findViewById(R.id.join_btn);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -51,9 +49,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
-        btnSignUp.setOnClickListener(this);
+        join_btn.setOnClickListener(this);
     }
-//    토스트메세지를 보내는 역할이죠
+
+    //    토스트메세지를 보내는 역할이죠
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -62,12 +61,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         String emailID = emailId.getText().toString();
         String paswd = passwd.getText().toString();
-        String userID = id.getText().toString();
-        final String userName = name.getText().toString();
+        String repaswd = repasswd.getText().toString();
 
-        if (v.getId() == R.id.btn_signUp) {
-            if (!userID.equals("") && !userName.equals("") && !emailID.equals("") && !paswd.equals("")) {
-//                UserData userInfor = new UserData(userID, userName, emailID, paswd);
+        if (paswd.equals(repaswd)) {
+            if (!emailID.equals("") && !paswd.equals("") && !repaswd.equals("")) {
 
                 firebaseAuth.createUserWithEmailAndPassword(emailID, paswd)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -78,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     UserProfileChangeRequest profileUpdate;
 
                                     profileUpdate = new UserProfileChangeRequest.Builder()
-                                            .setDisplayName(userName)
+                                            .setDisplayName(emailID)
                                             .build();
 
                                     user = firebaseAuth.getCurrentUser();
@@ -86,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                    if(task.isSuccessful()) {
+                                                    if (task.isSuccessful()) {
                                                         ManagementData.registerUser(user);
                                                     }
                                                 }
@@ -95,10 +92,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     //myRef.child(Constant.DB_CHILD_USER).child(userID).setValue(userInfor);
                                     toastMessage("회원가입이 완료되었습니다.");
 
-                                    id.setText("");
-                                    name.setText("");
                                     emailId.setText("");
                                     passwd.setText("");
+                                    repasswd.setText("");
 
                                     finish();
                                     onBackPressed();
@@ -113,9 +109,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             } else if (paswd.isEmpty()) {
                 passwd.setError("Password를 입력해주세요!");
                 passwd.requestFocus();
-
-            } else if (emailID.isEmpty() && paswd.isEmpty()) {
-                Toast.makeText(SignUpActivity.this, "Fields Empty!", Toast.LENGTH_SHORT).show();
 
             } else if (!(emailID.isEmpty() && paswd.isEmpty())) {
                 firebaseAuth.createUserWithEmailAndPassword(emailID, paswd).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener() {
@@ -133,6 +126,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             } else {
                 Toast.makeText(SignUpActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
+
+        } else {
+            toastMessage("비밀번호가 서로 일치하지 않습니다.");
+            passwd.setText("");
+            repasswd.setText("");
         }
     }
 }

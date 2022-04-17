@@ -45,17 +45,6 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/write_text"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="55dp"
-        android:backgroundTint="@color/colorPastelBlue"
-        android:src="@drawable/edit_icon_white"
-        app:fabCustomSize="48dp"
-        app:tint="@color/white" />
+
 
 </RelativeLayout>
