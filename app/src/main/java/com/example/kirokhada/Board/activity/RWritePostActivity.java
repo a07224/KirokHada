@@ -165,9 +165,6 @@ public class RWritePostActivity extends AppCompatActivity {
         FirebaseUser auth = FirebaseAuth.getInstance().getCurrentUser();
         String uid = auth.getUid();
 
-
-
-
     }
 
     private void getRandomString() {

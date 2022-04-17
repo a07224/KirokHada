@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.kirokhada.R;
-//import com.example.kirokhada.chat.ChatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,8 +58,6 @@ public class SbordActivity extends AppCompatActivity {
 
         getData();
 
-        onClickListener();
-
         transparency();
 
         checkUser();
@@ -91,7 +88,6 @@ public class SbordActivity extends AppCompatActivity {
         memberEdit = findViewById(R.id.memberCountEditText);
         contentEdit = findViewById(R.id.contentEditText);
 
-        chatButton = findViewById(R.id.chatButton);
         modify_btn = findViewById(R.id.modify_btn);
         del_btn = findViewById(R.id.del_btn);
         update_btn = findViewById(R.id.update_btn);
@@ -308,19 +304,5 @@ public class SbordActivity extends AppCompatActivity {
 
 
         content.setText("내용 : \n\n" + contentText);
-    }
-
-
-
-    private void onClickListener() {
-        chatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                intent.putExtra("roomCode", sc);
-                intent.putExtra("roomTitle", titleText);
-                startActivity(intent);
-            }
-        });
     }
 }

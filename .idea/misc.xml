@@ -21,6 +21,7 @@
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/menu/bottom_nav.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/bord_bg.xml" value="0.1165" />
+        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/btn_pastelpurple.xml" value="0.2985" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/button_bg.xml" value="0.1165" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/white_circle_bg.xml" value="0.1165" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_findmate.xml" value="0.18009118541033434" />
@@ -30,12 +31,14 @@
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_profile.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_re_board.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_report.xml" value="0.25729166666666664" />
+        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_review.xml" value="0.25" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_s_board.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_signup.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_userfind.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/bord_recyclerview_item.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/fragment_list.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/fragment_profile.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/input_layout.xml" value="0.1757852077001013" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/r_bord_recyclerview_item.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/menu/bottom_nav.xml" value="0.18645833333333334" />
       </map>
