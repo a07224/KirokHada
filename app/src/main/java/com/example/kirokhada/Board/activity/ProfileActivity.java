@@ -1,7 +1,7 @@
 package com.example.kirokhada.Board.activity;
 
-import static com.example.kirokhada.Board.Util.INTENT_PATH;
-import static com.example.kirokhada.Board.Util.showToast;
+import static com.example.kirokhada.Util.INTENT_PATH;
+import static com.example.kirokhada.Util.showToast;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,9 +20,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.kirokhada.CameraActivity;
 import com.example.kirokhada.R;
 import com.example.kirokhada.UserInfo;
-import com.example.kirokhada.findmate.CameraActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

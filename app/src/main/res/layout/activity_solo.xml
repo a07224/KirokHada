@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/bord_uploadText"
+                android:text="내용 :"
                 android:textSize="10pt" />
 
             <EditText
@@ -63,11 +63,11 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="158dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="64dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="25dp"
             android:layout_marginBottom="50dp"
-            android:background="@drawable/write_sprout"
+            android:background="@drawable/notebook"
             app:layout_constraintBottom_toTopOf="@+id/upload_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/formLayout" />

@@ -29,7 +29,6 @@
 
         <!--        로그인-->
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".MainActivity"/>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".UserFindActivity"/>
         <activity android:name=".ReportActivity"/>
