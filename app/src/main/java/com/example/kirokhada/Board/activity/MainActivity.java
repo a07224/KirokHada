@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragment profileFragment;
     private LinearLayout Main_FPL, Main_FWL, Main_PV;
     private FrameLayout Main_bg;
-
+    private int checked_point = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.action_review:
-                    fab();
+                    fab(checked_point);
                     break;
             }
 
@@ -82,20 +82,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void fab() {
-        Main_bg.setVisibility(View.VISIBLE);
-        Main_PV.setVisibility(View.VISIBLE);
-        Main_FPL.setOnClickListener(view -> {
-            Intent photoIntent = new Intent();
-            startActivity(photoIntent);
-        });
-        Main_FWL.setOnClickListener(view -> {
-            Intent writeIntent = new Intent(this, WritePostActivity.class);
-            startActivity(writeIntent);
-        });
-        Main_bg.setOnClickListener(view -> {
+    private void fab(int point) {
+
+        if(point == 0){
+            Main_bg.setVisibility(View.VISIBLE);
+            Main_PV.setVisibility(View.VISIBLE);
+            Main_FPL.setOnClickListener(view -> {
+                Intent photoIntent = new Intent();
+                startActivity(photoIntent);
+            });
+            Main_FWL.setOnClickListener(view -> {
+                Intent writeIntent = new Intent(this, WritePostActivity.class);
+                startActivity(writeIntent);
+            });
+            Main_bg.setOnClickListener(view -> {
+                Main_PV.setVisibility(View.GONE);
+                Main_bg.setVisibility(View.GONE);
+            });
+            checked_point = 1;
+        } else {
             Main_PV.setVisibility(View.GONE);
             Main_bg.setVisibility(View.GONE);
-        });
+            checked_point = 0;
+        }
     }
+
 }

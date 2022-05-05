@@ -38,20 +38,20 @@ public class WritePostActivity extends AppCompatActivity {
     String itemRandomString;
 
     TextView titleTextView;
-    TextView timeTextView;
-    TextView placeTextView;
-    TextView memberCountTextView;
+    TextView authorTextView;
+    TextView ratingTextView;
+    TextView keywordTextView;
 
     EditText titleEditText;
-    EditText timeEditText;
-    EditText placeEditText;
-    EditText memberEditText;
+    EditText authorEditText;
+    EditText ratingEditText;
+    EditText keywordEditText;
     EditText contentEditText;
 
     Button upload_btn;
 
     // EditText에서 가져온 데이터
-    String title, time, place, memberCount, content = null;
+    String title, author, rating, keyword, content = null;
 
     // 업로드 시간을 체크하는 데이터
     String uploadTimeText = "";
@@ -62,8 +62,8 @@ public class WritePostActivity extends AppCompatActivity {
     private FirebaseFirestore fireStore;
     private FirebaseUser auth;
 
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference("users");
+    private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private final DatabaseReference databaseReference = firebaseDatabase.getReference("users");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,20 +75,16 @@ public class WritePostActivity extends AppCompatActivity {
         getUserProfile();
         getRandomString();
 
-        upload_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getData();
+        upload_btn.setOnClickListener(view -> {
+            getData();
 
-                if (title != null && time != null && place != null && memberCount != null && content != null) {
-                    uploadData();
-                    finish();
-                } else {
-                    Toast showText = Toast.makeText(getApplicationContext(), "내용을 다 채워주세요~", Toast.LENGTH_SHORT);
-                    showText.show();
-                }
+            if (title != null && author != null && rating != null && keyword != null && content != null) {
+                uploadData();
+                finish();
+            } else {
+                Toast showText = Toast.makeText(getApplicationContext(), "내용을 다 채워주세요~", Toast.LENGTH_SHORT);
+                showText.show();
             }
-
         });
 
     }
@@ -104,14 +100,14 @@ public class WritePostActivity extends AppCompatActivity {
         View memberLayout = findViewById(R.id.memberCount_Layer);
 
         titleTextView = titleLayout.findViewById(R.id.textView_Bord);
-        timeTextView = timeLayout.findViewById(R.id.textView_Bord);
-        placeTextView = placeLayout.findViewById(R.id.textView_Bord);
-        memberCountTextView = memberLayout.findViewById(R.id.textView_Bord);
+        authorTextView = timeLayout.findViewById(R.id.textView_Bord);
+        ratingTextView = placeLayout.findViewById(R.id.textView_Bord);
+        keywordTextView = memberLayout.findViewById(R.id.textView_Bord);
 
         titleEditText = titleLayout.findViewById(R.id.editText_Bord);
-        timeEditText = timeLayout.findViewById(R.id.editText_Bord);
-        placeEditText = placeLayout.findViewById(R.id.editText_Bord);
-        memberEditText = memberLayout.findViewById(R.id.editText_Bord);
+        authorEditText = timeLayout.findViewById(R.id.editText_Bord);
+        ratingEditText = placeLayout.findViewById(R.id.editText_Bord);
+        keywordEditText = memberLayout.findViewById(R.id.editText_Bord);
         contentEditText = findViewById(R.id.content_Edit);
 
     }
@@ -119,17 +115,17 @@ public class WritePostActivity extends AppCompatActivity {
 
     private void setting() {
         titleTextView.setText("책 제목 :");
-        timeTextView.setText("작가 :");
-        placeTextView.setText("평점 :");
-        memberCountTextView.setText("키워드 :");
+        authorTextView.setText("작가 :");
+        ratingTextView.setText("평점 :");
+        keywordTextView.setText("키워드 :");
     }
 
     private void getData() {
 
         title = titleEditText.getText().toString();
-        time = timeEditText.getText().toString();
-        place = placeEditText.getText().toString();
-        memberCount = memberEditText.getText().toString();
+        author = authorEditText.getText().toString();
+        rating = ratingEditText.getText().toString();
+        keywordEditText.getText().toString();
         content = contentEditText.getText().toString();
 
         Date uploadTime = new Date(System.currentTimeMillis());
@@ -152,16 +148,13 @@ public class WritePostActivity extends AppCompatActivity {
         Log.d("asd", sc);
 
 
-        WriteInfo data = new WriteInfo(title, time, place, memberCount, content, email, uploadTimeText, sc, name, userProfileUrl);
+        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, sc, name, userProfileUrl);
 
         fireStore.collection("solo_runch").document(sc).set(data)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "업로드 성공!", Toast.LENGTH_LONG).show();
-                            finish();
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "업로드 성공!", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 });
     }
@@ -188,17 +181,14 @@ public class WritePostActivity extends AppCompatActivity {
         });
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document != null && document.getData() != null) {
-                        userProfileUrl = (String) document.getData().get("photoUrl");
-                    }
-                } else {
-                    Log.d("tag", "get failed with ", task.getException());
+        documentReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document != null && document.getData() != null) {
+                    userProfileUrl = (String) document.getData().get("photoUrl");
                 }
+            } else {
+                Log.d("tag", "get failed with ", task.getException());
             }
         });
 
@@ -212,11 +202,11 @@ public class WritePostActivity extends AppCompatActivity {
             switch (rIndex) {
                 case 0:
                     // a-z
-                    temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+                    temp.append((char) (rnd.nextInt(26) + 97));
                     break;
                 case 1:
                     // A-Z
-                    temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+                    temp.append((char) (rnd.nextInt(26) + 65));
                     break;
                 case 2:
                     // 0-9
