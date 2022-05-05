@@ -24,14 +24,16 @@
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/bord_item_bg.xml" value="0.193" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/btn_pastelpurple.xml" value="0.2985" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/button_bg.xml" value="0.1165" />
+        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/custom_pop_view.xml" value="0.255" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/edit_icon_white.xml" value="0.1" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/edittext_box.xml" value="0.1" />
+        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/main_bg_round.xml" value="0.255" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/drawable/white_circle_bg.xml" value="0.1165" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_camera.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_findmate.xml" value="0.18009118541033434" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_loading.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_login.xml" value="0.25729166666666664" />
-        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_main.xml" value="0.25729166666666664" />
+        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_profile.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_re_board.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/activity_report.xml" value="0.25729166666666664" />
@@ -45,6 +47,7 @@
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/fragment_list.xml" value="0.22" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/fragment_profile.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/input_layout.xml" value="0.1757852077001013" />
+        <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/main_pop_view.xml" value="0.75" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/layout/r_bord_recyclerview_item.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/parkh/Desktop/KirokHada/app/src/main/res/menu/bottom_nav.xml" value="0.18645833333333334" />
       </map>

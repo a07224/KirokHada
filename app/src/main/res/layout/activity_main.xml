@@ -17,8 +17,110 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPastelPurple"
+        android:elevation="4dp"
         app:itemIconTint="@color/colorWhite"
         app:itemTextColor="@color/colorWhite"
         app:menu="@menu/bottom_nav" />
+
+
+    <FrameLayout
+        android:id="@+id/main_bg_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC808080"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/main_pop_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_nav"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="1dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:background="@drawable/main_bg_round">
+
+
+            <LinearLayout
+                android:id="@+id/floating_photo_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/center_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/camera_outline_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사진으로"
+                    android:textColor="@color/black"
+                    android:textSize="4pt" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/center_layout"
+                android:layout_width="0.5dp"
+                android:layout_height="35dp"
+                android:background="@android:color/darker_gray"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/floating_writing_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/center_layout"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/write_outline_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="글로"
+                    android:textColor="@color/black"
+                    android:textSize="4pt" />
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_pop_view" />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.example.kirokhada.Board.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction ft;
     private ListFragment listFragment;
     private ProfileFragment profileFragment;
-    private FloatingActionButton fabOne;
-    private FloatingActionButton fabTwo;
+    private LinearLayout Main_FPL, Main_FWL, Main_PV;
+    private FrameLayout Main_bg;
 
 
     @Override
@@ -31,17 +33,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        init();
+
         bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.action_list :
+            switch (item.getItemId()) {
+                case R.id.action_list:
                     setFrag(0);
                     break;
-                case R.id.action_profile :
+                case R.id.action_profile:
                     setFrag(1);
                     break;
 
-                case R.id.action_review :
+                case R.id.action_review:
                     fab();
                     break;
             }
@@ -54,12 +58,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void init() {
+        Main_FWL = findViewById(R.id.floating_writing_layout);
+        Main_FPL = findViewById(R.id.floating_photo_layout);
+        Main_PV = findViewById(R.id.main_pop_view);
+        Main_bg = findViewById(R.id.main_bg_frame);
+    }
+
     //fragment 교체가 일어나는 실행문
-    private void setFrag(int n){
+    private void setFrag(int n) {
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();     //실제적인 fragment 교체
 
-        switch (n){
+        switch (n) {
             case 0:
                 ft.replace(R.id.frame_content, listFragment);
                 ft.commit();        //저장을 의미합니다.
@@ -72,28 +83,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fab() {
-
+        Main_bg.setVisibility(View.VISIBLE);
+        Main_PV.setVisibility(View.VISIBLE);
+        Main_FPL.setOnClickListener(view -> {
+            Intent photoIntent = new Intent();
+            startActivity(photoIntent);
+        });
+        Main_FWL.setOnClickListener(view -> {
+            Intent writeIntent = new Intent(this, WritePostActivity.class);
+            startActivity(writeIntent);
+        });
+        Main_bg.setOnClickListener(view -> {
+            Main_PV.setVisibility(View.GONE);
+            Main_bg.setVisibility(View.GONE);
+        });
     }
-
-//    public void fabAction() {
-//        fab = view.findViewById(R.id.write_text);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent intent = new Intent(getActivity(), WritePostActivity.class);
-//
-//                onDestroyView();
-//
-//                getDataList.clear();
-//                bordAdapter.notifyDataSetChanged();
-//                recyclerView.removeAllViewsInLayout();
-//                recyclerView.removeAllViews();
-//                bordAdapter.refresh();
-//                bordAdapter.notifyDataSetChanged();
-//
-//                startActivity(intent);
-//            }
-//        });
-//    }
 }
