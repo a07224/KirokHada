@@ -1,106 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SignUpActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorWhite"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="5dp">
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    tools:context=".SignUpActivity">
 
 
     <ImageView
-        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/sing_icon"
-        android:layout_marginLeft="15dp"
         android:layout_gravity="center_horizontal"
-        />
+        android:layout_marginTop="30dp"
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_cloudy"
-        android:id="@+id/sign_id"
-        android:paddingStart="14dp"
-        android:hint="Student Number"
+        android:src="@drawable/sing_icon" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
+        android:background="#eeeeee"
+        android:gravity="center">
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_cloudy"
-        android:id="@+id/sign_name"
-        android:paddingStart="14dp"
-        android:hint="NAME"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="360dp"
+            android:layout_height="405dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="50dp"
+            android:background="@color/white"
+            android:elevation="4dp">
 
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/email"
+                android:textAllCaps="false"
+                android:textColor="@color/colorGray"
+                android:textSize="9pt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_cloudy"
-        android:id="@+id/emailEditText"
-        android:paddingStart="14dp"
-        android:hint="E-Mail"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_box"
+                android:hint="@string/emain_hint"
+                android:paddingStart="10dp"
+                android:textSize="6pt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 
+            <TextView
+                android:id="@+id/passwordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Password"
+                android:textAllCaps="false"
+                android:textColor="@color/colorGray"
+                android:textSize="9pt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_cloudy"
-        android:id="@+id/passwordEditText"
-        android:paddingStart="14dp"
-        android:hint="PW"
-        android:inputType="textPassword"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_box"
+                android:hint="비밀번호를 적어주세요."
+                android:inputType="textPassword"
+                android:paddingStart="10dp"
+                android:textSize="6pt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordTextView" />
 
+            <TextView
+                android:id="@+id/rePasswordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Password Check"
+                android:textAllCaps="false"
+                android:textColor="@color/colorGray"
+                android:textSize="9pt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
-    <Button
-        android:id="@+id/btn_signUp"
-        android:layout_gravity="center"
-        android:layout_width="250dp"
-        android:layout_height="45dp"
-        android:textColor="#ffffff"
-        android:text="SIGN UP"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:background="@drawable/btn_pastelpurple"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
+            <EditText
+                android:id="@+id/rePasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_box"
+                android:hint="비밀번호를 다시 적어주세요."
+                android:inputType="textPassword"
+                android:paddingStart="10dp"
+                android:textSize="6pt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rePasswordTextView" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_backLogin"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:text="Back"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="20dp"-->
-<!--        android:gravity="center"-->
-<!--        android:background="@drawable/btn_blue"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/colorGray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rePasswordEditText" />
 
+            <Button
+                android:id="@+id/cancel_btn"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/transparent"
+                android:text="CANCEL"
+                android:textColor="@color/colorGray"
+                android:textSize="8pt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/join_btn"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/join_btn"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/transparent"
+                android:text="JOIN"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textSize="8pt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cancel_btn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
