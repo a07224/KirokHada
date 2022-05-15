@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fab(int point) {
 
-        if(point == 0){
+        if (point == 0) {
             Main_bg.setVisibility(View.VISIBLE);
             Main_PV.setVisibility(View.VISIBLE);
             Main_FPL.setOnClickListener(view -> {
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(photoIntent);
             });
             Main_FWL.setOnClickListener(view -> {
+                fab(1);
                 Intent writeIntent = new Intent(this, WritePostActivity.class);
                 startActivity(writeIntent);
             });
@@ -106,5 +107,4 @@ public class MainActivity extends AppCompatActivity {
             checked_point = 0;
         }
     }
-
 }

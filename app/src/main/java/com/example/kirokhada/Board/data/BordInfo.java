@@ -2,26 +2,24 @@ package com.example.kirokhada.Board.data;
 
 public class BordInfo {
     private String title;
-    private String time;
-    private String place;
-    private String person;
+    private String author;
+    private String rating;
+    private String keyword;
     private String contents;
     private String email;
     private String date;
     private String sc;
-    private String userName;
     private String userProfileUrl;
 
-    public BordInfo(String title, String time, String place, String person, String contents, String email, String date, String sc, String userName, String userProfileUrl) {
+    public BordInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String sc, String userProfileUrl) {
         this.title = title;
-        this.time = time;
-        this.place = place;
-        this.person = person;
+        this.author = author;
+        this.rating = rating;
+        this.keyword = keyword;
         this.contents = contents;
         this.email = email;
         this.date = date;
         this.sc = sc;
-        this.userName = userName;
         this.userProfileUrl = userProfileUrl;
     }
 
@@ -32,15 +30,15 @@ public class BordInfo {
     }
 
     public String getTime() {
-        return this.time;
+        return this.author;
     }
 
     public String getPlace() {
-        return this.place;
+        return this.rating;
     }
 
     public String getPerson() {
-        return this.person;
+        return this.keyword;
     }
 
     public String getContents() {
@@ -56,8 +54,6 @@ public class BordInfo {
     }
 
     public String getSC() {return this.sc;}
-
-    public String getUserName(){return this.userName;}
 
     public String getUserProfileUrl() {return this.userProfileUrl;}
 }

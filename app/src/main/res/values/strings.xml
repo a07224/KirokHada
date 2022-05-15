@@ -4,4 +4,8 @@
     <string name="request_permission">This sample needs camera permission.</string>
     <string name="email">Email</string>
     <string name="emain_hint">이메일을 적어주세요.</string>
+    <string name="rating">평점 :</string>
+    <string name="keyword">키워드 :</string>
+    <string name="author">작가 :</string>
+    <string name="title">제목 :</string>
 </resources>

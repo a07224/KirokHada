@@ -1,6 +1,5 @@
 package com.example.kirokhada.Board.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,14 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.kirokhada.R;
-import com.example.kirokhada.Board.activity.WritePostActivity;
 import com.example.kirokhada.Board.data.BordAdapter;
 import com.example.kirokhada.Board.data.BordInfo;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,11 +37,13 @@ public class ListFragment extends Fragment {
 
     RecyclerView recyclerView;
 
-    FloatingActionButton fab;
-
     EditText searchView;
 
     ArrayList<BordInfo> getDataList = new ArrayList<>();
+
+    // DB
+    String email = null;
+    String userID = null;
 
     @Nullable
     @Override
@@ -54,10 +52,18 @@ public class ListFragment extends Fragment {
 
         recyclerViewAction();
         refresh();
-
         filter();
+        getUserData();
 
         return view;
+    }
+
+    private void getUserData() {
+        FirebaseUser auth = FirebaseAuth.getInstance().getCurrentUser();
+        if (auth != null) {
+            userID = auth.getUid();
+            email = auth.getEmail();
+        }
     }
 
     @Override
@@ -95,10 +101,6 @@ public class ListFragment extends Fragment {
         });
     }
 
-
-
-
-
     public void recyclerViewAction() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
@@ -120,38 +122,35 @@ public class ListFragment extends Fragment {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("solo_runch").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
+        db.collection("book").document(email).collection(userID).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
 
-                    List<BordInfo> resultData = task.getResult().toObjects(BordInfo.class);
+                List<BordInfo> resultData = task.getResult().toObjects(BordInfo.class);
 
-                    getDataList.clear();
+                getDataList.clear();
 
-                    getDataList.addAll(resultData);
+                getDataList.addAll(resultData);
 
-                    // 정렬 해보자
-                    Collections.sort(getDataList, new Comparator<BordInfo>() {
-                        @Override
-                        public int compare(BordInfo o1, BordInfo o2) {
-                            return o1.getDate().compareTo(o2.getDate());
-                        }
-                    });
-
-                    Collections.reverse(getDataList);
-
-                    for (int i = 0; i < getDataList.size(); i++) {
-                        bordAdapter.addData(getDataList.get(i));
+                // 정렬 해보자
+                Collections.sort(getDataList, new Comparator<BordInfo>() {
+                    @Override
+                    public int compare(BordInfo o1, BordInfo o2) {
+                        return o1.getDate().compareTo(o2.getDate());
                     }
+                });
 
-                    bordAdapter.setList();
+                Collections.reverse(getDataList);
 
-                    bordAdapter.notifyDataSetChanged();
-
-                } else {
-                    Log.d("not working", "yes");
+                for (int i = 0; i < getDataList.size(); i++) {
+                    bordAdapter.addData(getDataList.get(i));
                 }
+
+                bordAdapter.setList();
+
+                bordAdapter.notifyDataSetChanged();
+
+            } else {
+                Log.d("not working", "yes");
             }
         });
     }

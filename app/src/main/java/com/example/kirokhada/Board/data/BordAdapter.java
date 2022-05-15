@@ -142,8 +142,6 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
             uploadTimeText = data.getDate();
             sc = data.getSC();
             timeTextView.setText(uploadTimeText);
-
-            userName = data.getUserName();
             userProfileUrl = data.getUserProfileUrl();
 
             if (userProfileUrl != null){

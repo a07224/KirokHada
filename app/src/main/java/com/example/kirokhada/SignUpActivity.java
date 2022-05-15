@@ -38,11 +38,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+
         emailId = findViewById(R.id.emailEditText);
         passwd = findViewById(R.id.passwordEditText);
         repasswd = findViewById(R.id.rePasswordEditText);
         join_btn = findViewById(R.id.join_btn);
-
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -64,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String repaswd = repasswd.getText().toString();
 
         if (paswd.equals(repaswd)) {
-            if (!emailID.equals("") && !paswd.equals("") && !repaswd.equals("")) {
+            if (!emailID.equals("") && !paswd.equals("")) {
 
                 firebaseAuth.createUserWithEmailAndPassword(emailID, paswd)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
