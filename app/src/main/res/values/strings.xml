@@ -8,4 +8,5 @@
     <string name="keyword">키워드 :</string>
     <string name="author">작가 :</string>
     <string name="title">제목 :</string>
+    <string name="solo">나만보기</string>
 </resources>

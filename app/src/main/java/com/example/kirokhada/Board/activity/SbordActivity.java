@@ -107,54 +107,45 @@ public class SbordActivity extends AppCompatActivity {
 
     private void userSerVice() {
 
-        modify_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                updateUI();
-
-                updateData();
-
-            }
+        modify_btn.setOnClickListener(view -> {
+            updateUI();
+            updateData();
         });
 
-        del_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        del_btn.setOnClickListener(view -> {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(SbordActivity.this);
-                builder.setTitle("게시물 삭제")
-                        .setMessage("정말로 게시한 글을 삭제 하시겠습니까?");
-                builder.setPositiveButton("네",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(final DialogInterface dialog, int which) {
-                                fireStore = FirebaseFirestore.getInstance();
+            AlertDialog.Builder builder = new AlertDialog.Builder(SbordActivity.this);
+            builder.setTitle("게시물 삭제")
+                    .setMessage("정말로 게시한 글을 삭제 하시겠습니까?");
+            builder.setPositiveButton("네",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, int which) {
+                            fireStore = FirebaseFirestore.getInstance();
 
-                                fireStore.collection("solo_runch").document(sc).delete()
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Toast.makeText(getApplicationContext(), "삭제 완료!", Toast.LENGTH_LONG).show();
-                                                    dialog.dismiss();
-                                                    finish();
-                                                    onBackPressed();
-                                                }
+                            fireStore.collection("solo_runch").document(sc).delete()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(getApplicationContext(), "삭제 완료!", Toast.LENGTH_LONG).show();
+                                                dialog.dismiss();
+                                                finish();
+                                                onBackPressed();
                                             }
-                                        });
-                            }
-                        });
-                builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                                        }
+                                    });
+                        }
+                    });
+            builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
 
-                builder.show();
+            builder.show();
 
-            }
         });
 
     }
@@ -179,9 +170,9 @@ public class SbordActivity extends AppCompatActivity {
         placeEdit.setText(placeText);
         contentEdit.setText(contentText);
 
-        place.setText("장소 : ");
+        place.setText("작가 : ");
         time.setText("시간 : ");
-        member.setText("인원 수 : ");
+        member.setText("별점 : ");
         content.setText("내용 : \n\n");
 
     }

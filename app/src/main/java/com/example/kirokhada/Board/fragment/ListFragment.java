@@ -19,9 +19,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.kirokhada.R;
 import com.example.kirokhada.Board.data.BordAdapter;
 import com.example.kirokhada.Board.data.BordInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.protobuf.Any;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +44,8 @@ public class ListFragment extends Fragment {
     EditText searchView;
 
     ArrayList<BordInfo> getDataList = new ArrayList<>();
+    ArrayList<BordInfo> mergeDataList = new ArrayList<>();
+
 
     // DB
     String email = null;
@@ -66,13 +72,7 @@ public class ListFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        searchView = view.findViewById(R.id.searchView);
-        searchView.setText("");
-
+    private void refreshCycle() {
         getDataList.clear();
         bordAdapter.notifyDataSetChanged();
         recyclerView.removeAllViewsInLayout();
@@ -80,6 +80,16 @@ public class ListFragment extends Fragment {
         bordAdapter.refresh();
         bordAdapter.notifyDataSetChanged();
         getData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        searchView = view.findViewById(R.id.searchView);
+        searchView.setText("");
+
+        refreshCycle();
 
     }
 
@@ -119,40 +129,41 @@ public class ListFragment extends Fragment {
     public void getData() {
         // 데이터 받아오는 공간
 
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("book").document(email).collection(userID).get().addOnCompleteListener(task -> {
+        db.collection("book").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
+                Log.d("test", "1");
                 List<BordInfo> resultData = task.getResult().toObjects(BordInfo.class);
 
                 getDataList.clear();
-
                 getDataList.addAll(resultData);
-
-                // 정렬 해보자
-                Collections.sort(getDataList, new Comparator<BordInfo>() {
-                    @Override
-                    public int compare(BordInfo o1, BordInfo o2) {
-                        return o1.getDate().compareTo(o2.getDate());
-                    }
-                });
-
-                Collections.reverse(getDataList);
 
                 for (int i = 0; i < getDataList.size(); i++) {
                     bordAdapter.addData(getDataList.get(i));
                 }
-
-                bordAdapter.setList();
-
-                bordAdapter.notifyDataSetChanged();
-
-            } else {
-                Log.d("not working", "yes");
             }
         });
+
+        db.collection("book-private").document(userID).collection(email).get().addOnCompleteListener(task_end -> {
+            if (task_end.isSuccessful()) {
+
+                Log.d("test", "2");
+                List<BordInfo> mergeData = task_end.getResult().toObjects(BordInfo.class);
+
+                getDataList.clear();
+                getDataList.addAll(mergeData);
+
+                for (int i = 0; i < getDataList.size(); i++) {
+                    bordAdapter.addData(getDataList.get(i));
+                }
+            }
+        });
+
+
+        bordAdapter.setList();
+        bordAdapter.notifyDataSetChanged();
     }
 
     public void filter() {

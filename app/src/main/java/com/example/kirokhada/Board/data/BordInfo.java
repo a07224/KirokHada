@@ -9,9 +9,10 @@ public class BordInfo {
     private String email;
     private String date;
     private String sc;
+    private String userName;
     private String userProfileUrl;
 
-    public BordInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String sc, String userProfileUrl) {
+    public BordInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String sc, String name,String userProfileUrl) {
         this.title = title;
         this.author = author;
         this.rating = rating;
@@ -30,15 +31,15 @@ public class BordInfo {
     }
 
     public String getTime() {
+        return this.date;
+    }
+
+    public String getAuthor() {
         return this.author;
     }
 
-    public String getPlace() {
-        return this.rating;
-    }
-
-    public String getPerson() {
-        return this.keyword;
+    public String getUserName() {
+        return this.userName;
     }
 
     public String getContents() {

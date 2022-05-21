@@ -3,6 +3,7 @@ package com.example.kirokhada.Board.data;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +18,17 @@ import com.example.kirokhada.R;
 import com.example.kirokhada.Board.activity.SbordActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder> {
 
-    private ArrayList<BordInfo> listData = new ArrayList<>();
+    private final ArrayList<BordInfo> listData = new ArrayList<>();
     private ArrayList<BordInfo> arrayList;
-    private Context contexts;
+    private final Context contexts;
 
     public void addData(BordInfo data) {
         listData.add(data);
@@ -41,7 +44,19 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
 
     public void setList() {
         arrayList = new ArrayList<>();
+
+        // 정렬 해보자
+        Collections.sort(listData, new Comparator<BordInfo>() {
+            @Override
+            public int compare(BordInfo o1, BordInfo o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+
+        Collections.reverse(listData);
+
         arrayList.addAll(listData);
+
     }
 
     public void filter(String searchText) {
@@ -88,11 +103,11 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
 
         String title, time, place, memberCount, content, uploadTimeText, email, sc, userName, userProfileUrl = null;
 
-        private TextView titleTextView;
-        private TextView subjectTextView;
-        private TextView timeTextView;
-        private View itemLayout;
-        private CircleImageView circleImageView;
+        private final TextView titleTextView;
+        private final TextView subjectTextView;
+        private final TextView timeTextView;
+        private final View itemLayout;
+        private final CircleImageView circleImageView;
 
 
         itemViewHolder(View itemView) {
@@ -109,39 +124,37 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
 
         private void itemClickListener() {
 
-            itemLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(contexts, SbordActivity.class);
-                    intent.putExtra("title", title);
-                    intent.putExtra("time", time);
-                    intent.putExtra("place", place);
-                    intent.putExtra("memberCount", memberCount);
-                    intent.putExtra("content", content);
-                    intent.putExtra("email", email);
-                    intent.putExtra("uploadTimeText", uploadTimeText);
-                    intent.putExtra("sc", sc);
-                    intent.putExtra("name", userName);
-                    intent.putExtra("profileUrl", userProfileUrl);
-                    ContextCompat.startActivity(contexts, intent, new Bundle());
-                }
+            itemLayout.setOnClickListener(view -> {
+                Intent intent = new Intent(contexts, SbordActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("time", time);
+                intent.putExtra("place", place);
+                intent.putExtra("memberCount", memberCount);
+                intent.putExtra("content", content);
+                intent.putExtra("email", email);
+                intent.putExtra("uploadTimeText", uploadTimeText);
+                intent.putExtra("sc", sc);
+                intent.putExtra("name", userName);
+                intent.putExtra("profileUrl", userProfileUrl);
+                ContextCompat.startActivity(contexts, intent, new Bundle());
             });
         }
 
         void onBind(BordInfo data) {
 
             titleTextView.setText(data.getTitle());
-            subjectTextView.setText(data.getPlace());
+            subjectTextView.setText(data.getAuthor());
 
             title = data.getTitle();
             time = data.getTime();
-            place = data.getPlace();
-            memberCount = data.getPerson();
+            place = data.getAuthor();
+            memberCount = data.getAuthor();
             content = data.getContents();
             email = data.getEmail();
             uploadTimeText = data.getDate();
             sc = data.getSC();
             timeTextView.setText(uploadTimeText);
+            userName = data.getUserName();
             userProfileUrl = data.getUserProfileUrl();
 
             if (userProfileUrl != null){
