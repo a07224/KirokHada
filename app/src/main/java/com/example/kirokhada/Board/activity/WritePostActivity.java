@@ -118,8 +118,9 @@ public class WritePostActivity extends AppCompatActivity {
 
     private void dbUploadData() {
         FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+        String status = "public";
         String sc = getRandomString();
-        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, userID);
+        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, userID, status, sc);
 
         fireStore.collection("book").document(sc).set(data)
                 .addOnCompleteListener(task -> {
@@ -132,10 +133,11 @@ public class WritePostActivity extends AppCompatActivity {
 
     private void dbUploadDataPrivate(){
         FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+        String status = "private";
         String sc = getRandomString();
-        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, userID);
+        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, userID, status, sc);
 
-        fireStore.collection("book-private").document(userID).collection(email).document(sc).set(data)
+        fireStore.collection("book").document(sc).set(data)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "업로드 성공!", Toast.LENGTH_LONG).show();

@@ -45,8 +45,6 @@
         <activity android:name=".Board.activity.SbordActivity" />
 
         <!--리뷰-->
-        <activity android:name=".Board.activity.RWritePostActivity" />
-        <activity android:name=".Board.activity.RbordActivity" />
 
 
     </application>

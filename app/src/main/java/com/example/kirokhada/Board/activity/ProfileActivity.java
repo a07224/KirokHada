@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity{
+
     private static final String TAG = "ProfileActivity";
     private ImageView profileImageView;
     private RelativeLayout buttonBackgroundLayout;
@@ -45,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity{
     private FirebaseUser user;
     private Uri profileImageUri;
     boolean isChanged= true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,6 +192,10 @@ public class ProfileActivity extends AppCompatActivity{
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
         startActivityForResult(intent, 0);
+    }
+
+    private void upDateBoardData() {
+
     }
 
 }

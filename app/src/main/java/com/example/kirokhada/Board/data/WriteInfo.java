@@ -2,9 +2,9 @@ package com.example.kirokhada.Board.data;
 
 public class WriteInfo {
 
-    private String title, author, rating, keyword, contents, email, date, uid;
+    private String title, author, rating, keyword, contents, email, date, uid, status, sc;
 
-    public WriteInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String uid) {
+    public WriteInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String uid, String status, String sc) {
         this.title = title;
         this.author = author;
         this.rating = rating;
@@ -13,6 +13,8 @@ public class WriteInfo {
         this.email = email;
         this.date = date;
         this.uid = uid;
+        this.status = status;
+        this.sc = sc;
     }
 
     public String getTitle() {
@@ -47,4 +49,7 @@ public class WriteInfo {
         return uid;
     }
 
+    public String getStatus() {return status;}
+
+    public String getSc() {return sc;}
 }

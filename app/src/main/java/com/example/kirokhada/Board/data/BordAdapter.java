@@ -14,13 +14,17 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.kirokhada.Board.utils.HangulUtils;
+import com.example.kirokhada.Board.utils.Utils;
 import com.example.kirokhada.R;
 import com.example.kirokhada.Board.activity.SbordActivity;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Locale;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,19 +48,7 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
 
     public void setList() {
         arrayList = new ArrayList<>();
-
-        // 정렬 해보자
-        Collections.sort(listData, new Comparator<BordInfo>() {
-            @Override
-            public int compare(BordInfo o1, BordInfo o2) {
-                return o1.getDate().compareTo(o2.getDate());
-            }
-        });
-
-        Collections.reverse(listData);
-
         arrayList.addAll(listData);
-
     }
 
     public void filter(String searchText) {
@@ -68,13 +60,22 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
             }
         } else {
             if (arrayList != null) {
-                for (BordInfo bordInfo : arrayList) {
-                    String name = bordInfo.getTitle();
-                    if (name.toLowerCase().contains(searchText)) {
-                        listData.add(bordInfo);
+                for (BordInfo wp : arrayList) {
+                    if(Utils.isNumber(searchText)){
+                        if(wp.getTitle().contains(searchText)){
+                            listData.add(wp);
+                        }
+                    } else {
+                        String iniName = HangulUtils.getHangulInitialSound(wp.getTitle(), searchText);
+                        if (iniName.contains(searchText)) {
+                            listData.add(wp);
+                        } else if (wp.getTitle().toLowerCase(Locale.getDefault()).contains(searchText)) {
+                            listData.add(wp);
+                        }
                     }
                 }
             }
+
         }
         notifyDataSetChanged();
     }
@@ -101,7 +102,7 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
     class itemViewHolder extends RecyclerView.ViewHolder {
 
 
-        String title, time, place, memberCount, content, uploadTimeText, email, sc, userName, userProfileUrl = null;
+        String title, author, rating, keyword, content, time, email, uid, status, sc;
 
         private final TextView titleTextView;
         private final TextView subjectTextView;
@@ -128,14 +129,14 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
                 Intent intent = new Intent(contexts, SbordActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("time", time);
-                intent.putExtra("place", place);
-                intent.putExtra("memberCount", memberCount);
+                intent.putExtra("author", author);
+                intent.putExtra("rating", rating);
+                intent.putExtra("keyword", keyword);
                 intent.putExtra("content", content);
                 intent.putExtra("email", email);
-                intent.putExtra("uploadTimeText", uploadTimeText);
+                intent.putExtra("uid", uid);
+                intent.putExtra("status", status);
                 intent.putExtra("sc", sc);
-                intent.putExtra("name", userName);
-                intent.putExtra("profileUrl", userProfileUrl);
                 ContextCompat.startActivity(contexts, intent, new Bundle());
             });
         }
@@ -146,20 +147,31 @@ public class BordAdapter extends RecyclerView.Adapter<BordAdapter.itemViewHolder
             subjectTextView.setText(data.getAuthor());
 
             title = data.getTitle();
-            time = data.getTime();
-            place = data.getAuthor();
-            memberCount = data.getAuthor();
+            author = data.getAuthor();
+            rating = data.getRating();
+            keyword = data.getKeyword();
             content = data.getContents();
             email = data.getEmail();
-            uploadTimeText = data.getDate();
-            sc = data.getSC();
-            timeTextView.setText(uploadTimeText);
-            userName = data.getUserName();
-            userProfileUrl = data.getUserProfileUrl();
+            time = data.getDate();
+            uid = data.getUid();
+            status = data.getStatus();
+            sc = data.getSc();
+            timeTextView.setText(time);
 
-            if (userProfileUrl != null){
-                Glide.with(contexts).load(userProfileUrl).into(circleImageView);
-            }
+            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(uid);
+            documentReference.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        if (document.exists()) {
+                            if(Objects.requireNonNull(document.getData()).get("photoUrl") != null){
+
+                                Glide.with(contexts).load(document.getData().get("photoUrl")).centerCrop().override(500).into(circleImageView);
+                            }
+                        }
+                    }
+                }
+            });
         }
     }
 }

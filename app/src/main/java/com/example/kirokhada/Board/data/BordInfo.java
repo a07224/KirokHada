@@ -1,18 +1,10 @@
 package com.example.kirokhada.Board.data;
 
 public class BordInfo {
-    private String title;
-    private String author;
-    private String rating;
-    private String keyword;
-    private String contents;
-    private String email;
-    private String date;
-    private String sc;
-    private String userName;
-    private String userProfileUrl;
 
-    public BordInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String sc, String name,String userProfileUrl) {
+    private String title, author, rating, keyword, contents, email, date, uid, status, sc;
+
+    public BordInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String sc, String uid, String status) {
         this.title = title;
         this.author = author;
         this.rating = rating;
@@ -20,41 +12,47 @@ public class BordInfo {
         this.contents = contents;
         this.email = email;
         this.date = date;
+        this.uid = uid;
+        this.status = status;
         this.sc = sc;
-        this.userProfileUrl = userProfileUrl;
     }
 
-    public BordInfo(){}
+    public BordInfo(){
+    }
 
     public String getTitle() {
-        return this.title;
-    }
-
-    public String getTime() {
-        return this.date;
+        return title;
     }
 
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
-    public String getUserName() {
-        return this.userName;
+    public String getRating() {
+        return rating;
+    }
+
+    public String getKeyword() {
+        return keyword;
     }
 
     public String getContents() {
-        return this.contents;
+        return contents;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public String getDate() {
-        return this.date;
+        return date;
     }
 
-    public String getSC() {return this.sc;}
+    public String getUid() {
+        return uid;
+    }
 
-    public String getUserProfileUrl() {return this.userProfileUrl;}
+    public String getStatus() {return status;}
+
+    public String getSc() {return sc;}
 }

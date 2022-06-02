@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
@@ -11,10 +11,10 @@
         android:id="@+id/s_title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:text="제목"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
+        android:elevation="4dp"
+        android:text="제목"
         android:textColor="@android:color/black"
         android:textSize="12pt"
         android:textStyle="bold"
@@ -25,8 +25,14 @@
 
     <EditText
         android:id="@+id/titleEditText"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:maxLength="12"
+        android:maxLines="1"
+        android:textSize="12pt"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/contentLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="60dp"
         android:background="@drawable/white_circle_bg"
@@ -45,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/s_title_textView">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/cute"
@@ -103,17 +110,19 @@
             android:layout_marginEnd="10dp"
             android:background="@android:color/transparent"
             android:text="수정 완료"
+            android:textColor="@color/black"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/modify_btn"
-            android:layout_width="55dp"
+            android:layout_width="62dp"
             android:layout_height="40dp"
             android:layout_marginBottom="5dp"
             android:background="@android:color/transparent"
             android:text="수정"
+            android:textColor="@color/black"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/justLine"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,12 +130,13 @@
 
         <Button
             android:id="@+id/del_btn"
-            android:layout_width="55dp"
+            android:layout_width="61dp"
             android:layout_height="40dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="5dp"
             android:background="@android:color/transparent"
             android:text="삭제"
+            android:textColor="@color/black"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/justLine"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -134,7 +144,7 @@
         <LinearLayout
             android:id="@+id/justLine"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="1dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
@@ -145,40 +155,40 @@
             app:layout_constraintTop_toBottomOf="@+id/userProfile_s" />
 
         <TextView
-            android:id="@+id/placeText"
+            android:id="@+id/authorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="책 제목 : "
+            android:text="작가 : "
             android:textColor="@color/colorBlack"
             android:textSize="8pt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/justLine" />
 
         <TextView
-            android:id="@+id/timeText"
+            android:id="@+id/ratingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:text="작가 : "
-            android:textColor="@color/colorBlack"
-            android:textSize="8pt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/placeText" />
-
-        <TextView
-            android:id="@+id/memberCountText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:text="평점 : "
             android:textColor="@color/colorBlack"
             android:textSize="8pt"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeText" />
+            app:layout_constraintTop_toBottomOf="@+id/authorText" />
+
+        <TextView
+            android:id="@+id/keywordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:text="키워드 : "
+            android:textColor="@color/colorBlack"
+            android:textSize="8pt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingText" />
 
 
         <TextView
@@ -192,35 +202,37 @@
             android:textSize="8pt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memberCountText" />
+            app:layout_constraintTop_toBottomOf="@+id/keywordText" />
 
         <EditText
-            android:id="@+id/placeEditText"
+            android:id="@+id/authorEditText"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@id/placeText"
+            app:layout_constraintStart_toEndOf="@id/authorText"
             app:layout_constraintTop_toBottomOf="@id/justLine" />
 
         <EditText
-            android:id="@+id/timeEditText"
+            android:id="@+id/ratingEditText"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/timeText"
-            app:layout_constraintTop_toBottomOf="@+id/placeEditText" />
+            app:layout_constraintStart_toEndOf="@+id/ratingText"
+            app:layout_constraintTop_toBottomOf="@+id/authorEditText" />
 
         <EditText
-            android:id="@+id/memberCountEditText"
+            android:id="@+id/keywordEditText"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/memberCountText"
-            app:layout_constraintTop_toBottomOf="@+id/timeEditText" />
+            app:layout_constraintStart_toEndOf="@+id/keywordText"
+            app:layout_constraintTop_toBottomOf="@+id/ratingEditText" />
 
         <EditText
             android:id="@+id/contentEditText"
@@ -231,9 +243,8 @@
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memberCountEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/keywordEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

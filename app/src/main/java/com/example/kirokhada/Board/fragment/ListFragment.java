@@ -19,19 +19,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.kirokhada.R;
 import com.example.kirokhada.Board.data.BordAdapter;
 import com.example.kirokhada.Board.data.BordInfo;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.protobuf.Any;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ListFragment extends Fragment {
 
@@ -44,7 +41,6 @@ public class ListFragment extends Fragment {
     EditText searchView;
 
     ArrayList<BordInfo> getDataList = new ArrayList<>();
-    ArrayList<BordInfo> mergeDataList = new ArrayList<>();
 
 
     // DB
@@ -96,18 +92,15 @@ public class ListFragment extends Fragment {
     private void refresh() {
         final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPinkPurple);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getDataList.clear();
-                bordAdapter.notifyDataSetChanged();
-                recyclerView.removeAllViewsInLayout();
-                recyclerView.removeAllViews();
-                bordAdapter.refresh();
-                bordAdapter.notifyDataSetChanged();
-                getData();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getDataList.clear();
+            bordAdapter.notifyDataSetChanged();
+            recyclerView.removeAllViewsInLayout();
+            recyclerView.removeAllViews();
+            bordAdapter.refresh();
+            bordAdapter.notifyDataSetChanged();
+            getData();
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 
@@ -134,36 +127,39 @@ public class ListFragment extends Fragment {
         db.collection("book").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
-                Log.d("test", "1");
                 List<BordInfo> resultData = task.getResult().toObjects(BordInfo.class);
 
                 getDataList.clear();
-                getDataList.addAll(resultData);
+
+                for (int i = 0; i < resultData.size(); i++) {
+                    if(Objects.equals(resultData.get(i).getStatus(), "private")){
+                        if(resultData.get(i).getEmail().equals(email)){
+                            getDataList.add(resultData.get(i));
+                        }else{
+                            Log.d("list-00", "else loop");
+                        }
+                    }else {
+                        getDataList.add(resultData.get(i));
+                    }
+                }
+                // 정렬 해보자
+                Collections.sort(getDataList, new Comparator<BordInfo>() {
+                    @Override
+                    public int compare(BordInfo o1, BordInfo o2) {
+                        return o1.getDate().compareTo(o2.getDate());
+                    }
+                });
+
+                Collections.reverse(getDataList);
 
                 for (int i = 0; i < getDataList.size(); i++) {
                     bordAdapter.addData(getDataList.get(i));
                 }
+
+                bordAdapter.setList();
+                bordAdapter.notifyDataSetChanged();
             }
         });
-
-        db.collection("book-private").document(userID).collection(email).get().addOnCompleteListener(task_end -> {
-            if (task_end.isSuccessful()) {
-
-                Log.d("test", "2");
-                List<BordInfo> mergeData = task_end.getResult().toObjects(BordInfo.class);
-
-                getDataList.clear();
-                getDataList.addAll(mergeData);
-
-                for (int i = 0; i < getDataList.size(); i++) {
-                    bordAdapter.addData(getDataList.get(i));
-                }
-            }
-        });
-
-
-        bordAdapter.setList();
-        bordAdapter.notifyDataSetChanged();
     }
 
     public void filter() {

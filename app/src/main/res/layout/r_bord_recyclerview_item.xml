@@ -3,9 +3,9 @@
     android:id="@+id/r_bord_item_layout"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_marginStart="20dp"
+    android:layout_marginStart="12dp"
     android:layout_marginTop="20dp"
-    android:layout_marginEnd="20dp"
+    android:layout_marginEnd="12dp"
     android:background="@drawable/bord_item_bg"
     android:elevation="8dp">
 
