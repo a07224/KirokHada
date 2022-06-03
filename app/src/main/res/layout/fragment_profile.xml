@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="20dp"
-    tools:context=".MainActivity">
+    tools:context=".Board.activity.MainActivity">
 
 
     <LinearLayout
@@ -106,7 +106,7 @@
                 android:textSize="20dp"></TextView>
 
             <TextView
-                android:id="@+id/majorTextView"
+                android:id="@+id/genreTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25dp" />

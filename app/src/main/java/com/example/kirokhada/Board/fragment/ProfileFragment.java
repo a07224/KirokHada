@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment {
     private ImageView profileImageView;
     private TextView  nameTextView;
     private TextView  ageTextView;
-    private TextView  majorTextView;
+    private TextView genreTextView;
     private TextView  introTextView;
     private TextView  genderTextView;
     private Context context;
@@ -62,7 +62,7 @@ public class ProfileFragment extends Fragment {
         profileImageView = root.findViewById(R.id.profileImageView);
         nameTextView = root.findViewById(R.id.nameTextView);
         ageTextView = root.findViewById(R.id.ageTextView);
-        majorTextView = root.findViewById(R.id.majorTextView);
+        genreTextView = root.findViewById(R.id.genreTextView);
         introTextView = root.findViewById(R.id.profile_intro_TextView);
         genderTextView=root.findViewById(R.id.genderTextView);
         write_btn.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +167,7 @@ public class ProfileFragment extends Fragment {
                             }
                             nameTextView.setText(document.getData().get("name").toString());
                             ageTextView.setText(document.getData().get("age").toString());
-                            majorTextView.setText(document.getData().get("major").toString());
+                            genreTextView.setText(document.getData().get("genre").toString());
                             introTextView.setText(document.getData().get("intro").toString());
                             genderTextView.setText(document.getData().get("gender").toString());
                         } else {

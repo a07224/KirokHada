@@ -4,24 +4,24 @@ public class UserInfo {
 
     private String name;
     private String age;
-    private String major;
+    private String genre;
     private String photoUrl;
     private String Intro;
     private String gender;
 
-    public UserInfo(String name, String age, String major, String Intro, String gender, String photoUrl){
+    public UserInfo(String name, String age, String genre, String Intro, String gender, String photoUrl){
         this.name = name;
         this.age = age;
-        this.major = major;
+        this.genre = genre;
         this.Intro = Intro;
         this.gender=gender;
         this.photoUrl = photoUrl;
     }
 
-    public UserInfo(String name, String age, String major, String Intro, String gender){
+    public UserInfo(String name, String age, String genre, String Intro, String gender){
         this.name = name;
         this.age = age;
-        this.major = major;
+        this.genre = genre;
         this.Intro=Intro;
         this.gender=gender;
     }
@@ -42,12 +42,12 @@ public class UserInfo {
         this.age = age;
     }
 
-    public String getMajor() {
-        return major;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public String getPhotoUrl() {
