@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="20dp"
-    tools:context=".MainActivity">
+    tools:context=".Board.activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
         <Button
             android:id="@+id/btn_capture"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:background="@drawable/profile_btn"
             android:gravity="center"
             android:text="프로필 사진 변경"
@@ -67,17 +67,19 @@
             <Button
                 android:id="@+id/picture"
                 android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/profile_btn"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:text="사진촬영" />
+                android:text="사진촬영"
+
+                />
 
             <Button
                 android:id="@+id/gallery"
                 android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="@drawable/profile_btn"
                 android:gravity="center"
                 android:textColor="#ffffff"
@@ -135,7 +137,7 @@
                 android:textSize="20dp"></TextView>
 
             <EditText
-                android:id="@+id/majorEditText"
+                android:id="@+id/genreEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="선호장르를 입력해주세요." />

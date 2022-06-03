@@ -121,12 +121,12 @@ public class ProfileActivity extends AppCompatActivity{
 
     private void storageUploader() {
         final String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
-        final String major = ((EditText) findViewById(R.id.majorEditText)).getText().toString();
+        final String genre = ((EditText) findViewById(R.id.genreEditText)).getText().toString();
         final String age = ((EditText) findViewById(R.id.ageEditText)).getText().toString();
         final String Intro = ((EditText) findViewById(R.id.profile_intro)).getText().toString();
         final String gender = ((EditText) findViewById(R.id.gender)).getText().toString();
 
-        if(name.length()>0 && major.length()>1 && age.length()>1&&Intro.length()>0 &&gender.length()>1){
+        if(name.length()>0 && genre.length()>1 && age.length()>1&&Intro.length()>0 &&gender.length()>1){
             final FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
             user = FirebaseAuth.getInstance().getCurrentUser();
@@ -135,7 +135,7 @@ public class ProfileActivity extends AppCompatActivity{
             Log.d(TAG, "storageUploader: uri="+ profileImageUri);
 
             if (profileImageUri ==null) {
-                UserInfo userInfo = new UserInfo(name, age, major, Intro, gender);
+                UserInfo userInfo = new UserInfo(name, age, genre, Intro, gender);
                 storeUploader(userInfo);
             } else {
                 FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
@@ -156,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity{
                         imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                UserInfo userInfo = new UserInfo(name, age, major, Intro, gender, uri.toString());
+                                UserInfo userInfo = new UserInfo(name, age, genre, Intro, gender, uri.toString());
                                 storeUploader(userInfo);
                             }
                         });
