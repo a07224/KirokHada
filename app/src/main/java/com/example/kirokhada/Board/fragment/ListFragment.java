@@ -67,7 +67,7 @@ public class ListFragment extends Fragment {
             email = auth.getEmail();
         }
     }
-/*
+
     private void refreshCycle() {
         getDataList.clear();
         bordAdapter.notifyDataSetChanged();
@@ -88,7 +88,8 @@ public class ListFragment extends Fragment {
         refreshCycle();
 
     }
-*/
+
+
     private void refresh() {
         final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPinkPurple);
@@ -102,17 +103,6 @@ public class ListFragment extends Fragment {
             getData();
             swipeRefreshLayout.setRefreshing(false);
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        searchView = view.findViewById(R.id.searchView);
-        searchView.setText("");
-
-        refresh();
-
     }
 
     public void recyclerViewAction() {
