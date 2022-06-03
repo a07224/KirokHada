@@ -3,6 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_camera.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_loading.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_photo.xml" value="0.3515625" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_profile.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_report.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_review.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_s_board.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_signup.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_userfind.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/activity_write_post.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/bord_recyclerview_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/fragment_camera2_basic.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/fragment_list.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/fragment_profile.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/input_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/main_pop_view.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/LG/Desktop/KirokHada/app/src/main/res/layout/r_bord_recyclerview_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/drawable/btn_cloudy.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/drawable/btn_lightgray.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/drawable/btn_pastelpurple.xml" value="0.1" />
