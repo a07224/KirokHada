@@ -2,6 +2,6 @@
 <paths>
     <external-path
         name="my_images"
-        path="Android/data/com.example.android_tesstwo/files/Pictures" />
+        path="Android/data/com.example.kirokhada/files/Pictures" />
     <external-cache-path name="external_cache" path="."/>
 </paths>
