@@ -2,18 +2,9 @@ package com.example.kirokhada.Board.data;
 
 public class WriteInfo {
 
-    private String title;
-    private String author;
-    private String rating;
-    private String keyword;
-    private String contents;
-    private String email;
-    private String date;
-    private String profileURL;
-    private String sc;
+    private String title, author, rating, keyword, contents, email, date, uid, status, sc;
 
-
-    public WriteInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String profileURL, String sc) {
+    public WriteInfo(String title, String author, String rating, String keyword, String contents, String email, String date, String uid, String status, String sc) {
         this.title = title;
         this.author = author;
         this.rating = rating;
@@ -21,43 +12,44 @@ public class WriteInfo {
         this.contents = contents;
         this.email = email;
         this.date = date;
+        this.uid = uid;
+        this.status = status;
         this.sc = sc;
-        this.profileURL = profileURL;
-    }
-
-    public String getSc() {
-        return this.sc;
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
     public String getRating() {
-        return this.rating;
+        return rating;
     }
 
     public String getKeyword() {
-        return this.keyword;
+        return keyword;
     }
 
     public String getContents() {
-        return this.contents;
+        return contents;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public String getDate() {
-        return this.date;
+        return date;
     }
 
-    public String getUserProfileURL() {
-        return this.profileURL;
+    public String getUid() {
+        return uid;
     }
+
+    public String getStatus() {return status;}
+
+    public String getSc() {return sc;}
 }

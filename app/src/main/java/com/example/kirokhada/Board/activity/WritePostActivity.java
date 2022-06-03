@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,8 +16,6 @@ import com.example.kirokhada.R;
 import com.example.kirokhada.Board.data.WriteInfo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -30,29 +30,32 @@ public class WritePostActivity extends AppCompatActivity {
     EditText keywordEditText;
     EditText contentEditText;
 
+    // View
     Button upload_btn;
+    Switch type_switch;
 
     // DB
     String email = null;
     String userID = null;
-    String itemRandomString = "";
 
     // EditText에서 가져온 데이터
     String title, author, rating, keyword, content = null;
 
-    // 업로드 시간을 체크하는 데이터
+    // 체크 데이터
     String uploadTimeText = "";
-    String userProfileUrl = "";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_solo);
+        setContentView(R.layout.activity_write_post);
 
         init();
-        getUserProfile();
-        getRandomString();
+        buttonListener();
 
+    }
+
+    private void buttonListener() {
         upload_btn.setOnClickListener(view -> {
             getData();
 
@@ -64,13 +67,13 @@ public class WritePostActivity extends AppCompatActivity {
                 showText.show();
             }
         });
-
     }
 
 
     private void init() {
 
         upload_btn = findViewById(R.id.upload_button);
+        type_switch = findViewById(R.id.type_switch);
 
         titleEditText = findViewById(R.id.bookTitle_editText);
         authorEditText = findViewById(R.id.author_editText);
@@ -102,17 +105,24 @@ public class WritePostActivity extends AppCompatActivity {
         if (auth != null) {
             userID = auth.getUid();
             email = auth.getEmail();
-            dbLoad();
-        }
+            if(!type_switch.isChecked()){
+                Log.d("test", "1");
+                dbUploadData();
+            }else {
+                dbUploadDataPrivate();
+                Log.d("test", "2");
+            }
 
+        }
     }
 
-    private void dbLoad() {
-        String sc = itemRandomString;
+    private void dbUploadData() {
         FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
-        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, userProfileUrl, sc);
+        String status = "public";
+        String sc = getRandomString();
+        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, userID, status, sc);
 
-        fireStore.collection("book").document(email).collection(userID).document(sc).set(data)
+        fireStore.collection("book").document(sc).set(data)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "업로드 성공!", Toast.LENGTH_LONG).show();
@@ -121,25 +131,22 @@ public class WritePostActivity extends AppCompatActivity {
                 });
     }
 
-    private void getUserProfile() {
+    private void dbUploadDataPrivate(){
+        FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+        String status = "private";
+        String sc = getRandomString();
+        WriteInfo data = new WriteInfo(title, author, rating, keyword, content, email, uploadTimeText, userID, status, sc);
 
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        documentReference.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document != null && document.getData() != null) {
-                    userProfileUrl = (String) document.getData().get("photoUrl");
-                }
-            } else {
-                Log.d("tag", "get failed with ", task.getException());
-            }
-        });
-
-        Log.d("ER-NPE", "userProfileUrl = " + userProfileUrl);
-
+        fireStore.collection("book").document(sc).set(data)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "업로드 성공!", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                });
     }
 
-    private void getRandomString() {
+    private String getRandomString() {
         StringBuffer temp = new StringBuffer();
         Random rnd = new Random();
         for (int i = 0; i < 20; i++) {
@@ -147,11 +154,11 @@ public class WritePostActivity extends AppCompatActivity {
             switch (rIndex) {
                 case 0:
                     // a-z
-                    temp.append((char) (rnd.nextInt(26) + 97));
+                    temp.append((char) ((int) (rnd.nextInt(26)) + 97));
                     break;
                 case 1:
                     // A-Z
-                    temp.append((char) (rnd.nextInt(26) + 65));
+                    temp.append((char) ((int) (rnd.nextInt(26)) + 65));
                     break;
                 case 2:
                     // 0-9
@@ -160,6 +167,6 @@ public class WritePostActivity extends AppCompatActivity {
             }
         }
 
-        itemRandomString = temp.toString();
+        return temp.toString();
     }
 }

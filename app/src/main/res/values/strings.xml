@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KirokHada</string>
+    <string name="app_name">기록하다</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
     <string name="request_permission">This sample needs camera permission.</string>
     <string name="email">Email</string>
@@ -8,4 +8,8 @@
     <string name="keyword">키워드 :</string>
     <string name="author">작가 :</string>
     <string name="title">제목 :</string>
+    <string name="solo">나만보기</string>
+    <string name="FirstMessage">인식할 문자를 찍어주세요.</string>
+    <string name="LoadingMessage">잠시만 기다려주세요.결과가 여기에 나타납니다.</string>
+    <string name="CompleteMessage">문자인식이 완료되었습니다.</string>
 </resources>

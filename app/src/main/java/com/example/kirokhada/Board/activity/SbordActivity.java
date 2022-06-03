@@ -1,7 +1,6 @@
 package com.example.kirokhada.Board.activity;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,17 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.kirokhada.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -35,15 +33,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SbordActivity extends AppCompatActivity {
 
-    Button chatButton, modify_btn, del_btn, update_btn;
+    Button modify_btn, del_btn, update_btn;
 
-    TextView name, date, place, time, member, content, title;
+    TextView name, date, title, author, rating, keyword, content;
 
-    EditText placeEdit, timeEdit, memberEdit, contentEdit, titleEdit;
+    EditText titleEdit, authorEdit, ratingEdit, keywordEdit, contentEdit;
 
-    String titleText, timeText, placeText, memberCountText, contentText, uploadTimeText, emailText, sc, userName, userProfile = "";
+    String titleText, timeText, authorText, ratingText, keywordText, contentText, emailText, sc, uid, status;
 
-    String titleUpdate, timeUpdate, placeUpdate, memberCountUpdate, contentUpdate, uploadTimeUpdate, emailUpdate = "";
+    String titleUpdate, uploadTimeUpdate, authorUpdate, ratingUpdate, keywordUpdate, contentUpdate, emailUpdate = "";
+
+    String currentTimeText;
 
     CircleImageView circleImageView;
 
@@ -74,18 +74,20 @@ public class SbordActivity extends AppCompatActivity {
     private void init() {
 
         circleImageView = findViewById(R.id.userProfile_s);
+
         title = findViewById(R.id.s_title_textView);
         name = findViewById(R.id.userName_s);
         date = findViewById(R.id.dateCount);
-        place = findViewById(R.id.placeText);
-        time = findViewById(R.id.timeText);
-        member = findViewById(R.id.memberCountText);
+
+        author = findViewById(R.id.authorText);
+        rating = findViewById(R.id.ratingText);
+        keyword = findViewById(R.id.keywordText);
         content = findViewById(R.id.contentText);
 
         titleEdit = findViewById(R.id.titleEditText);
-        placeEdit = findViewById(R.id.placeEditText);
-        timeEdit = findViewById(R.id.timeEditText);
-        memberEdit = findViewById(R.id.memberCountEditText);
+        authorEdit = findViewById(R.id.authorEditText);
+        ratingEdit = findViewById(R.id.ratingEditText);
+        keywordEdit = findViewById(R.id.keywordEditText);
         contentEdit = findViewById(R.id.contentEditText);
 
         modify_btn = findViewById(R.id.modify_btn);
@@ -98,7 +100,11 @@ public class SbordActivity extends AppCompatActivity {
         FirebaseUser firebaseAuth = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseAuth != null) {
             nowUser = firebaseAuth.getEmail();
+            Log.d("email", emailText);
+            Log.d("email", nowUser + " = nowUSer");
+
             if (nowUser != null && nowUser.equals(emailText)) {
+                Log.d("email", "ok");
                 modify_btn.setVisibility(View.VISIBLE);
                 del_btn.setVisibility(View.VISIBLE);
             }
@@ -107,60 +113,39 @@ public class SbordActivity extends AppCompatActivity {
 
     private void userSerVice() {
 
-        modify_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                updateUI();
-
-                updateData();
-
-            }
+        modify_btn.setOnClickListener(view -> {
+            updateUI();
+            updateData();
         });
 
-        del_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        del_btn.setOnClickListener(view -> {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(SbordActivity.this);
-                builder.setTitle("게시물 삭제")
-                        .setMessage("정말로 게시한 글을 삭제 하시겠습니까?");
-                builder.setPositiveButton("네",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(final DialogInterface dialog, int which) {
-                                fireStore = FirebaseFirestore.getInstance();
+            AlertDialog.Builder builder = new AlertDialog.Builder(SbordActivity.this);
+            builder.setTitle("게시물 삭제")
+                    .setMessage("정말로 게시한 글을 삭제 하시겠습니까?");
+            builder.setPositiveButton("네",
+                    (dialog, which) -> {
+                        fireStore = FirebaseFirestore.getInstance();
 
-                                fireStore.collection("solo_runch").document(sc).delete()
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Toast.makeText(getApplicationContext(), "삭제 완료!", Toast.LENGTH_LONG).show();
-                                                    dialog.dismiss();
-                                                    finish();
-                                                    onBackPressed();
-                                                }
-                                            }
-                                        });
-                            }
-                        });
-                builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                        fireStore.collection("book").document(sc).delete()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "삭제 완료!", Toast.LENGTH_LONG).show();
+                                        dialog.dismiss();
+                                        finish();
+                                        onBackPressed();
+                                    }
+                                });
+                    });
+            builder.setNegativeButton("아니요", (dialog, which) -> dialog.dismiss());
 
-                builder.show();
+            builder.show();
 
-            }
         });
 
     }
 
     private void updateUI() {
-
         modify_btn.setVisibility(View.GONE);
         del_btn.setVisibility(View.GONE);
         title.setVisibility(View.GONE);
@@ -168,26 +153,24 @@ public class SbordActivity extends AppCompatActivity {
         update_btn.setVisibility(View.VISIBLE);
 
         titleEdit.setVisibility(View.VISIBLE);
-        timeEdit.setVisibility(View.VISIBLE);
-        memberEdit.setVisibility(View.VISIBLE);
-        placeEdit.setVisibility(View.VISIBLE);
+        authorEdit.setVisibility(View.VISIBLE);
+        ratingEdit.setVisibility(View.VISIBLE);
+        keywordEdit.setVisibility(View.VISIBLE);
         contentEdit.setVisibility(View.VISIBLE);
 
         titleEdit.setText(titleText);
-        timeEdit.setText(timeText);
-        memberEdit.setText(memberCountText);
-        placeEdit.setText(placeText);
+        authorEdit.setText(authorText);
+        ratingEdit.setText(ratingText);
+        keywordEdit.setText(keywordText);
         contentEdit.setText(contentText);
 
-        place.setText("장소 : ");
-        time.setText("시간 : ");
-        member.setText("인원 수 : ");
+        author.setText("작가 : ");
+        rating.setText("평점 : ");
+        keyword.setText("키워드 : ");
         content.setText("내용 : \n\n");
-
     }
 
     private void finishUI() {
-
         modify_btn.setVisibility(View.VISIBLE);
         del_btn.setVisibility(View.VISIBLE);
         title.setVisibility(View.VISIBLE);
@@ -195,75 +178,80 @@ public class SbordActivity extends AppCompatActivity {
         update_btn.setVisibility(View.GONE);
 
         titleEdit.setVisibility(View.INVISIBLE);
-        timeEdit.setVisibility(View.INVISIBLE);
-        memberEdit.setVisibility(View.INVISIBLE);
-        placeEdit.setVisibility(View.INVISIBLE);
+        authorEdit.setVisibility(View.INVISIBLE);
+        ratingEdit.setVisibility(View.INVISIBLE);
+        keywordEdit.setVisibility(View.INVISIBLE);
         contentEdit.setVisibility(View.INVISIBLE);
 
     }
 
     private void updateData() {
 
-        update_btn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
+        update_btn.setOnClickListener(v -> {
 
-                titleUpdate = titleEdit.getText().toString();
-                placeUpdate = placeEdit.getText().toString();
-                timeUpdate = timeEdit.getText().toString();
-                memberCountUpdate = memberEdit.getText().toString();
-                contentUpdate = contentEdit.getText().toString();
+            titleUpdate = titleEdit.getText().toString();
+            authorUpdate = authorEdit.getText().toString();
+            ratingUpdate = ratingEdit.getText().toString();
+            keywordUpdate = keywordEdit.getText().toString();
+            contentUpdate = contentEdit.getText().toString();
 
-                Date uploadTime = new Date(System.currentTimeMillis());
+            Date uploadTime = new Date(System.currentTimeMillis());
 
-                SimpleDateFormat mFormat = new SimpleDateFormat("MM/dd HH:mm:ss");
+            SimpleDateFormat mFormat = new SimpleDateFormat("MM/dd HH:mm:ss");
 
-                uploadTimeUpdate = mFormat.format(uploadTime);
+            uploadTimeUpdate = mFormat.format(uploadTime);
 
-                emailUpdate = emailText;
+            emailUpdate = emailText;
 
-                if (!titleUpdate.equals("") && !placeUpdate.equals("") && !timeUpdate.equals("")
-                        && !memberCountUpdate.equals("") && !contentUpdate.equals("") && emailUpdate != null) {
+            if (!titleUpdate.equals("") && !authorUpdate.equals("") && !ratingUpdate.equals("")
+                    && !keywordUpdate.equals("") && !contentUpdate.equals("") && emailUpdate != null) {
 
-                    Log.d("asd", "asd");
+                Map<String, Object> upDateMap = new HashMap<>();
+                upDateMap.put("title", titleUpdate);
+                upDateMap.put("author", authorUpdate);
+                upDateMap.put("rating", ratingUpdate);
+                upDateMap.put("keyword", keywordUpdate);
+                upDateMap.put("contents", contentUpdate);
+                upDateMap.put("email", emailUpdate);
+                upDateMap.put("date", uploadTimeUpdate);
+                upDateMap.put("uid", uid);
+                upDateMap.put("status", status);
 
-                    Map<String, Object> upDateMap = new HashMap<>();
-                    upDateMap.put("title", titleUpdate);
-                    upDateMap.put("time", timeUpdate);
-                    upDateMap.put("place", placeUpdate);
-                    upDateMap.put("person", memberCountUpdate);
-                    upDateMap.put("contents", contentUpdate);
-                    upDateMap.put("email", emailUpdate);
-                    upDateMap.put("date", uploadTimeUpdate);
-                    upDateMap.put("sc", sc);
+                fireStore = FirebaseFirestore.getInstance();
 
-                    fireStore = FirebaseFirestore.getInstance();
+                fireStore.collection("book").document(sc).update(upDateMap)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "수정 완료!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                    fireStore.collection("solo_runch").document(sc).update(upDateMap)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(getApplicationContext(), "수정 완료!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                title.setText(titleUpdate);
+                author.setText("작가 : " + authorUpdate);
+                rating.setText("평점 : " + ratingUpdate);
+                keyword.setText("키워드 : " + keywordUpdate);
+                content.setText("내용 : \n\n" + contentUpdate);
 
-                    title.setText(titleUpdate);
-                    time.setText("시간 : " + timeUpdate);
-                    place.setText("장소 : " + placeUpdate);
-                    member.setText("인원 수 : " + memberCountUpdate);
-                    content.setText("내용 : \n\n" + contentUpdate);
+                date.setText(uploadTimeUpdate);
 
-                    date.setText(uploadTimeUpdate);
+                Date currentTime = new Date(System.currentTimeMillis());
 
-                    finishUI();
-                } else {
-                    Toast.makeText(getApplicationContext(), "빈 칸 없이 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                }
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat cuFormat = new SimpleDateFormat("MM/dd HH:mm:ss");
 
+                currentTimeText = cuFormat.format(uploadTime);
+
+                titleText = titleUpdate;
+                timeText = currentTimeText;
+                authorText = authorUpdate;
+                ratingText = ratingUpdate;
+                keywordText = keywordUpdate;
+                contentText = contentUpdate;
+
+                finishUI();
+            } else {
+                Toast.makeText(getApplicationContext(), "빈 칸 없이 입력해 주세요.", Toast.LENGTH_SHORT).show();
             }
+
         });
 
     }
@@ -274,14 +262,15 @@ public class SbordActivity extends AppCompatActivity {
 
         titleText = intent.getStringExtra("title");
         timeText = intent.getStringExtra("time");
-        placeText = intent.getStringExtra("place");
-        memberCountText = intent.getStringExtra("memberCount");
+        authorText = intent.getStringExtra("author");
+        ratingText = intent.getStringExtra("rating");
+        keywordText = intent.getStringExtra("keyword");
         contentText = intent.getStringExtra("content");
-        uploadTimeText = intent.getStringExtra("uploadTimeText");
+
         emailText = intent.getStringExtra("email");
         sc = intent.getStringExtra("sc");
-        userName = intent.getStringExtra("name");
-        userProfile = intent.getStringExtra("profileUrl");
+        uid = intent.getStringExtra("uid");
+        status = intent.getStringExtra("status");
 
         setData();
     }
@@ -289,20 +278,28 @@ public class SbordActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setData() {
 
-        // 프러필 완성시 여기에 데이터 주기
-        name.setText(userName);
+        // 프로필 받아오는 코드
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(uid);
+        documentReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document != null) {
+                    if (document.exists()) {
+                        if(document.getData().get("photoUrl") != null){
+                            name.setText(document.getData().get("name").toString());
+                            Glide.with(getApplicationContext()).load(document.getData().get("photoUrl")).centerCrop().override(500).into(circleImageView);
+                        }
+                    }
+                }
+            }
+        });
 
-        if (userProfile != null){
-            Glide.with(getApplicationContext()).load(userProfile).centerCrop().into(circleImageView);
-        }
         // 정상 데이터
         title.setText(titleText);
-        date.setText(uploadTimeText);
-        place.setText("장소 : " + placeText);
-        time.setText("시간 : " + timeText);
-        member.setText("인원 수 : " + memberCountText);
-
-
+        date.setText(timeText);
+        author.setText("작가 : " + authorText);
+        rating.setText("평점 : " + ratingText);
+        keyword.setText("키워드 : " + keywordText);
         content.setText("내용 : \n\n" + contentText);
     }
 }

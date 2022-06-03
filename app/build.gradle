@@ -26,6 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.example.kirokhada'
 }
 
 dependencies {
@@ -70,6 +71,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     testImplementation 'junit:junit:4.13.2'
 
+    // Tess-Two OCR
+    implementation 'com.rmtheis:tess-two:9.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="my_images"
+        path="Android/data/com.example.android_tesstwo/files/Pictures" />
+    <external-cache-path name="external_cache" path="."/>
+</paths>

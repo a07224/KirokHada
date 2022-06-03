@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ListFragment extends Fragment {
 
@@ -40,6 +41,7 @@ public class ListFragment extends Fragment {
     EditText searchView;
 
     ArrayList<BordInfo> getDataList = new ArrayList<>();
+
 
     // DB
     String email = null;
@@ -66,13 +68,7 @@ public class ListFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        searchView = view.findViewById(R.id.searchView);
-        searchView.setText("");
-
+    private void refreshCycle() {
         getDataList.clear();
         bordAdapter.notifyDataSetChanged();
         recyclerView.removeAllViewsInLayout();
@@ -80,24 +76,32 @@ public class ListFragment extends Fragment {
         bordAdapter.refresh();
         bordAdapter.notifyDataSetChanged();
         getData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        searchView = view.findViewById(R.id.searchView);
+        searchView.setText("");
+
+        refreshCycle();
 
     }
+
 
     private void refresh() {
         final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPinkPurple);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getDataList.clear();
-                bordAdapter.notifyDataSetChanged();
-                recyclerView.removeAllViewsInLayout();
-                recyclerView.removeAllViews();
-                bordAdapter.refresh();
-                bordAdapter.notifyDataSetChanged();
-                getData();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getDataList.clear();
+            bordAdapter.notifyDataSetChanged();
+            recyclerView.removeAllViewsInLayout();
+            recyclerView.removeAllViews();
+            bordAdapter.refresh();
+            bordAdapter.notifyDataSetChanged();
+            getData();
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 
@@ -119,18 +123,26 @@ public class ListFragment extends Fragment {
     public void getData() {
         // 데이터 받아오는 공간
 
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("book").document(email).collection(userID).get().addOnCompleteListener(task -> {
+        db.collection("book").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
                 List<BordInfo> resultData = task.getResult().toObjects(BordInfo.class);
 
                 getDataList.clear();
 
-                getDataList.addAll(resultData);
-
+                for (int i = 0; i < resultData.size(); i++) {
+                    if(Objects.equals(resultData.get(i).getStatus(), "private")){
+                        if(resultData.get(i).getEmail().equals(email)){
+                            getDataList.add(resultData.get(i));
+                        }else{
+                            Log.d("list-00", "else loop");
+                        }
+                    }else {
+                        getDataList.add(resultData.get(i));
+                    }
+                }
                 // 정렬 해보자
                 Collections.sort(getDataList, new Comparator<BordInfo>() {
                     @Override
@@ -146,11 +158,7 @@ public class ListFragment extends Fragment {
                 }
 
                 bordAdapter.setList();
-
                 bordAdapter.notifyDataSetChanged();
-
-            } else {
-                Log.d("not working", "yes");
             }
         });
     }

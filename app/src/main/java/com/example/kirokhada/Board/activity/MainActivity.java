@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             Main_bg.setVisibility(View.VISIBLE);
             Main_PV.setVisibility(View.VISIBLE);
             Main_FPL.setOnClickListener(view -> {
-                Intent photoIntent = new Intent();
+                Intent photoIntent = new Intent(this, PhotoActivity.class);
                 startActivity(photoIntent);
             });
             Main_FWL.setOnClickListener(view -> {
