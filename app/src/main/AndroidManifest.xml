@@ -45,7 +45,7 @@
         <!--게시판-->
         <activity android:name=".Board.activity.WritePostActivity" />
         <activity android:name=".Board.activity.SbordActivity" />
-        <activity android:name=".Board.activity.PhotoActivity"
+        <activity android:name=".Board.activity.WritePostActivitybyCamera"
             android:configChanges="orientation|keyboardHidden"
             android:exported="true"
             tools:ignore="Instantiatable"> <!--화면 회전시 데이터 새로고침 방지-->
