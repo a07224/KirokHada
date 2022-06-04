@@ -44,18 +44,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_capture"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:background="@drawable/profile_btn"
-        android:gravity="center"
-        android:text="내 활동로그"
-        android:textColor="#ffffff"
-        android:textSize="10dp"></Button>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
