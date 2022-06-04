@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Cho Beom/AndroidStudioProjects/KirokHada3/app/src/main/res/layout/activity_camera.xml" value="0.15096251266464034" />
-        <entry key="..\:/Users/Cho Beom/AndroidStudioProjects/KirokHada3/app/src/main/res/layout/activity_login.xml" value="0.15096251266464034" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/drawable/btn_cloudy.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/drawable/btn_lightgray.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/drawable/btn_pastelpurple.xml" value="0.1" />
@@ -19,13 +17,18 @@
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/activity_profile.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/activity_report.xml" value="0.264" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/activity_review.xml" value="0.2390625" />
+        <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/activity_s_board.xml" value="0.203125" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/activity_signup.xml" value="0.2" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/activity_userfind.xml" value="0.2" />
+        <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/activity_write_post.xml" value="0.203125" />
+        <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/bord_recyclerview_item.xml" value="0.203125" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/fragment_camera2_basic.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/fragment_list.xml" value="0.15760869565217392" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
+        <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/input_layout.xml" value="0.203125" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/main_pop_view.xml" value="0.152" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/provider_paths.xml" value="0.12409420289855072" />
+        <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/layout/r_bord_recyclerview_item.xml" value="0.203125" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/menu/bottom_nav.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/User/Desktop/KirokHada/app/src/main/res/xml/provider_paths.xml" value="0.12409420289855072" />
       </map>
